@@ -1,0 +1,26 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "key": "categories",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Category Service Api",
+          "Version": "v1",
+          "Url": "http://localhost:5070/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "key": "orders",
+      "TransformByOcelotConfig": true,
+      "Config": [
+        {
+          "Name": "Order Publisher Service Api",
+          "Version": "v1",
+          "Url": "http://localhost:7000/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

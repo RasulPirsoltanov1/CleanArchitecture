@@ -1,0 +1,17 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v3/categories",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5070
+        }
+      ],
+      "UpstreamPathTemplate": "/kategoriler",
+      "UpstreamHttpMethod": [ "Get", "POST", "PUT", "DELETE" ],
+      "SwaggerKey": "categories"
+    }
+  ]
+}

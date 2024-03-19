@@ -1,0 +1,117 @@
+﻿@model RoleDetailsVM
+
+<div id="loading" class="d-none">
+    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div class="row mt-5 shadow-sm p-5">
+    <div class="col-12 mb-3">
+        <h6 class="display-6">   @Model.Role.Name</h6>
+    </div>
+    <div class="col-6">
+        <div class="card border-0 shadow-sm p-1">
+            <div class="card-header border-success">
+                In Roles
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush" id="inRole">
+                    @foreach (var inRole in Model.Members)
+                    {
+                        <li class="list-group-item"
+                            data-role="true"
+                            data-email="@inRole.Email">@inRole.UserName</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card border-0 shadow-sm   p-1">
+            <div class="card-header border-danger">
+                Not In Roles
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush" id="notInRole">
+                    @foreach (var inRole in Model.NonMembers)
+                    {
+                        <li class="list-group-item"
+                            data-role="false"
+                            data-email="@inRole.Email">@inRole.UserName</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section css {
+    <style>
+        .list-group {
+            cursor: pointer
+        }
+
+        #loading {
+            position: absolute;
+            top: 20%;
+            left: 48%;
+            z-index: 1000;
+        }
+    </style>
+}
+@section js {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <script>
+
+        function showLoading(isLoading) {
+            if (isLoading) {
+                $("#loading").removeClass("d-none");
+            }
+            else {
+                $("#loading").addClass("d-none");
+            }
+        }
+
+
+        $(document).ready(function () {
+
+            $(document).on('click', '.list-group .list-group-item', function () {
+                showLoading(true);
+
+                let role = $(this).data("role");
+                console.log(role)
+                let email = $(this).data("email");
+                let roleName = '@Model.Role.Name';
+
+                $.ajax({
+                    url: '/admin/roles/edit',
+                    type: 'post',
+                    data: {
+                        email: email,
+                        roleName: roleName
+                    },
+                    success: (response) => { },
+                    error: (err) => { },
+                    complete: (result) => { showLoading(false) }
+                })
+
+            })
+
+        });
+    </script>
+    <script>
+
+        $(document).on('click', '#inRole .list-group-item', function (event) {
+            let currentItem = $(event.currentTarget);
+            currentItem.data("role", true); 
+            currentItem.appendTo('#notInRole');
+        });
+
+        $(document).on('click', '#notInRole .list-group-item', function (event) {
+            let currentItem = $(event.currentTarget);
+            currentItem.data("role", false); 
+            currentItem.appendTo('#inRole');
+        });
+    </script>
+}

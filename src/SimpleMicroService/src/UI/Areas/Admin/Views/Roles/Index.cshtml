@@ -1,0 +1,51 @@
+﻿@model IEnumerable<UI.Models.ApplicationRole>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row mt-5">
+    <div class="col p-5 shadow-sm">
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NormalizedName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ExpireDate)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr> 
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NormalizedName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExpireDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new {   id=item.Id    }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

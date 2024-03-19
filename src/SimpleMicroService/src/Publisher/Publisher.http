@@ -1,0 +1,27 @@
+@Publisher_HostAddress = http://localhost:5126
+
+GET {{Publisher_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+
+POST {{Publisher_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "OrderID": 10257,
+  "CustomerID": "HILAA",
+  "EmployeeID": 4,
+  "OrderDate": "1996-07-16T00:00:00",
+  "RequiredDate": "1996-08-13T00:00:00",
+  "ShippedDate": "1996-07-22T00:00:00",
+  "ShipVia": 3,
+  "Freight": 81.91,
+  "ShipName": "HILARION-Abastos",
+  "ShipAddress": "Carrera 22 con Ave. Carlos Soublette #8-35",
+  "ShipCity": "San Cristóbal",
+  "ShipRegion": "Táchira",
+  "ShipPostalCode": "5022",
+  "ShipCountry": "Venezuela"
+}

@@ -1,0 +1,34 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '8.0.x'
+    includePreviewVersions: true
+  displayName: 'Install .NET SDK'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: './tests/Application.FunctionalTests/Application.FunctionalTests.csproj'
+  displayName: 'Restore NuGet packages'
+
+- script: dotnet build ./tests/Application.FunctionalTests/Application.FunctionalTests.csproj --configuration $(buildConfiguration) --no-restore
+  displayName: 'Build the project'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: './tests/Application.FunctionalTests/Application.FunctionalTests.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-build --logger trx'
+    testRunTitle: 'Application Functional Tests'
+  displayName: 'Run tests'
+
