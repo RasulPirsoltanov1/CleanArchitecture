@@ -7,6 +7,8 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+	  <RootNamespace>Application.FunctionalTests</RootNamespace>
+	  <AssemblyName>Application.FunctionalTests</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
